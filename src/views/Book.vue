@@ -13,28 +13,23 @@
                 <td>{{item.name}}</td>
             </tr>
         </table>
-        {{msg}}
     </div>
 </template>
 
 <script>
+    // 所有的方法都得在这写
     export default {
         name: "Book.vue",
+        created() {
+            const _this = this
+            axios.get("http://localhost:8181/book/findAll").then(function (response) {
+                _this.books = response.data;
+            })
+
+        },
         data(){
             return{
-                msg:"Hello Vue",
-                books:[
-                    {
-                        id: 1,
-                        name: "Java零基础实战",
-                        author: "xuan1"
-                    },
-                    {
-                        id: 2,
-                        name: "Vue零基础实战",
-                        author: "xuan2"
-                    },
-                ]
+                books: []
             }
         }
     }
